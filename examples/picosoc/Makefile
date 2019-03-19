@@ -14,17 +14,20 @@ hardware.bin: hardware.asc
 	icepack hardware.asc hardware.bin
 
 
-firmware.elf: sections.lds start.S firmware.c 
+firmware.elf: sections.lds start.S firmware.c
 	riscv32-unknown-elf-gcc -march=rv32imc -nostartfiles -Wl,-Bstatic,-T,sections.lds,--strip-debug,-Map=firmware.map,--cref  -ffreestanding -nostdlib -o firmware.elf start.S firmware.c
 
+#firmware.bin: firmware.elf
+# riscv32-unknown-elf-objcopy -O binary firmware.elf /dev/stdout > firmware.bin
+
 firmware.bin: firmware.elf
-	riscv32-unknown-elf-objcopy -O binary firmware.elf /dev/stdout > firmware.bin
+	riscv32-unknown-elf-objcopy -O binary firmware.elf firmware.bin
+
+build_firmware:
+	riscv32-unknown-elf-gcc -march=rv32imc -nostartfiles -Wl,-Bstatic,-T,sections.lds,--strip-debug,-Map=firmware.map,--cref  -ffreestanding -nostdlib -o firmware.elf start.S firmware.c
+	riscv32-unknown-elf-objcopy -O binary firmware.elf firmware.bin
 
 
 clean:
 	rm -f firmware.elf firmware.hex firmware.bin firmware.o firmware.map \
 	      hardware.blif hardware.log hardware.asc hardware.rpt hardware.bin
-
-
-
-
