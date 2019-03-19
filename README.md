@@ -1,3 +1,4 @@
+here is a comipiled toolchain and some stock firmware: https://drive.google.com/file/d/1qJ1d-On3G-b2UbYn3N0lG_ItegmkT_vZ/view?usp=sharing
 # TinyFPGA BX
 The TinyFPGA BX board is a tiny FPGA board with low cost per logic element and convenient USB bitstream programming capability.  It measures just 18mm x 36mm and is a perfect fit for breadboards. The heart of the BX board is a iCE40LP8K-CM81 FPGA from Lattice.  
 
